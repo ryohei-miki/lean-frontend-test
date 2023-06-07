@@ -48,7 +48,44 @@ describe("真偽値", () => {
   });
 });
 
-describe("数値", () => {});
-describe("文字列", () => {});
+describe("数値", () => {
+  const val = 1 + 2;
+  test("等しい", () => {
+    expect(val).toBe(3);
+    expect(val).toEqual(3);
+  });
+  test("大きい", () => {
+    expect(val).toBeGreaterThan(2);
+    expect(val).toBeGreaterThanOrEqual(3);
+  });
+  test("小さい", () => {
+    expect(val).toBeLessThan(4);
+    expect(val).toBeLessThanOrEqual(3);
+  });
+});
+
+describe("文字列", () => {
+  const val = "neko";
+  test("一致", () => {
+    expect(val).toBe("neko");
+    expect(val).toEqual("neko");
+  });
+  test("含む", () => {
+    expect(val).toContain("ne");
+    expect(val).not.toContain("inu");
+  });
+  test("オブジェクトに含まれる文字列を検証", () => {
+    const obj = { status: 200, message: "今日はいい日です" };
+    expect(obj).toEqual({
+      status: 200,
+      message: expect.stringContaining("今日"),
+    });
+    expect(obj).toEqual({
+      status: 200,
+      message: expect.stringMatching(/いい日/),
+    });
+  });
+});
+
 describe("配列", () => {});
 describe("オブジェクト", () => {});
